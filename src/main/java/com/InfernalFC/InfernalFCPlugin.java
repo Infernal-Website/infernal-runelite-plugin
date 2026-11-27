@@ -238,7 +238,7 @@ public class InfernalFCPlugin extends Plugin
 			{
 				// The player id is included in the event, so we can use that to get the player name,
 				// which avoids having to parse out the combat level and any icons preceding the name.
-				Player player = client.getCachedPlayers()[event.getId()];
+				Player player = client.getTopLevelWorldView().players().byIndex(event.getId());
 				if (player == null)
 				{
 					return;
@@ -253,10 +253,7 @@ public class InfernalFCPlugin extends Plugin
 
 			SwingUtilities.invokeLater(() ->
 			{
-				if (!uiNavigationButton.isSelected())
-				{
-					uiNavigationButton.getOnSelect().run();
-				}
+				clientToolbar.openPanel(uiNavigationButton);
 				panel.SwitchPanel("lookup");
 				panel.getLookupPanel().SearchExact(target);
 			});
