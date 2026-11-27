@@ -14,7 +14,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.*;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -204,15 +204,15 @@ public class InfernalFCPlugin extends Plugin
 			return;
 		}
 
-		int groupId = WidgetInfo.TO_GROUP(event.getActionParam1());
+		int groupId = event.getActionParam1() >>> 16;
 		String option = event.getOption();
 
-		if (groupId == WidgetInfo.FRIENDS_LIST.getGroupId() || groupId == WidgetInfo.FRIENDS_CHAT.getGroupId() ||
-				groupId == WidgetInfo.CHATBOX.getGroupId() && !KICK_OPTION.equals(option) || //prevent from adding for Kick option (interferes with the raiding party one)
-				groupId == WidgetInfo.RAIDING_PARTY.getGroupId() || groupId == WidgetInfo.PRIVATE_CHAT_MESSAGE.getGroupId() ||
-				groupId == WidgetInfo.IGNORE_LIST.getGroupId())
+		if (groupId == InterfaceID.FRIENDS || groupId == InterfaceID.CHATCHANNEL_CURRENT ||
+				groupId == InterfaceID.CHATBOX && !KICK_OPTION.equals(option) || //prevent from adding for Kick option (interferes with the raiding party one)
+				groupId == InterfaceID.RAIDS_SIDEPANEL || groupId == InterfaceID.PM_CHAT ||
+				groupId == InterfaceID.IGNORE)
 		{
-			if (!AFTER_OPTIONS.contains(option) || (option.equals("Delete") && groupId != WidgetInfo.IGNORE_LIST.getGroupId()))
+			if (!AFTER_OPTIONS.contains(option) || (option.equals("Delete") && groupId != InterfaceID.IGNORE))
 			{
 				return;
 			}
