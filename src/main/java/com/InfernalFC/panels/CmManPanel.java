@@ -1,6 +1,7 @@
 package com.InfernalFC.panels;
 
 import com.InfernalFC.InfernalFCConfig;
+import lombok.extern.slf4j.Slf4j;
 import com.InfernalFC.InfernalFCPanel;
 import com.InfernalFC.helpers.InventoryManager;
 import com.InfernalFC.helpers.ResourceManager;
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 
+@Slf4j
 public class CmManPanel extends JPanel {
     @Inject()
     private Provider<InfernalFCPanel> infernalFCPanel;
@@ -171,7 +173,7 @@ public class CmManPanel extends JPanel {
             thread.start();
 
         } catch (Exception e) {
-            System.out.println(e);
+            log.error("Failed to start CM manual update task", e);
         }
 
         return label;

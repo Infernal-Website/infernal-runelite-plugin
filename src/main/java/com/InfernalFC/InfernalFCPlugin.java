@@ -177,9 +177,10 @@ public class InfernalFCPlugin extends Plugin
 					panel.getRanksPanel().updateItems();
 				});
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				log.warn("Interrupted while updating inventory items", e);
+				Thread.currentThread().interrupt();
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				log.warn("Failed to update inventory items", e);
 			}
 		}
 	}

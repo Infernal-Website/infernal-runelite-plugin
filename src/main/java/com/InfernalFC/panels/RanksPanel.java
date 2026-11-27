@@ -1,6 +1,7 @@
 package com.InfernalFC.panels;
 
 import com.InfernalFC.helpers.DataManager;
+import lombok.extern.slf4j.Slf4j;
 import com.InfernalFC.helpers.InventoryManager;
 import com.InfernalFC.helpers.ResourceManager;
 import com.InfernalFC.models.ItemData;
@@ -15,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.Comparator;
 
+@Slf4j
 public class RanksPanel extends JPanel{
     private final DataManager dataManager;
     private final ResourceManager resourceManager;
@@ -150,7 +152,7 @@ public class RanksPanel extends JPanel{
             thread.start();
 
         } catch (Exception e) {
-            System.out.println(e);
+            log.error("Failed to start ranks update task", e);
         }
 
         return label;
@@ -166,7 +168,7 @@ public class RanksPanel extends JPanel{
             thread.start();
 
         } catch (Exception e) {
-            System.out.println(e);
+            log.error("Failed to start ranks update task", e);
         }
 
         return label;

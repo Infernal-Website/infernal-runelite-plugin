@@ -1,6 +1,7 @@
 package com.InfernalFC.panels;
 
 import com.InfernalFC.InfernalFCConfig;
+import lombok.extern.slf4j.Slf4j;
 import com.InfernalFC.helpers.DataManager;
 import com.InfernalFC.models.EventData;
 import com.InfernalFC.models.PointsData;
@@ -17,6 +18,7 @@ import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+@Slf4j
 public class HomePanel extends JPanel {
     private final DataManager dataManager;
     private JPanel buttonPanel = new JPanel();
@@ -90,9 +92,9 @@ public class HomePanel extends JPanel {
             try {
                 Desktop.getDesktop().browse(new URI(url));
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warn("Failed to open URL in browser: {}", url, e);
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+                log.warn("Invalid URL: {}", url, e);
             }
         }
     }
